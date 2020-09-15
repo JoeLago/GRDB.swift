@@ -197,6 +197,11 @@ public struct Configuration {
     ///
     /// Default: nil
     public var targetQueue: DispatchQueue? = nil
+
+    /// Strategy for decoding a column name
+    ///
+    /// Default: convertToLowercase
+    public var columnDecodingStrategy: Database.ColumnDecodingStrategy = .caseInsensitive
     
     // MARK: - Factory Configuration
     

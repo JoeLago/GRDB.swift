@@ -1584,7 +1584,33 @@ extension Database {
         /// The `EXCLUSIVE` transaction kind
         case exclusive = "EXCLUSIVE"
     }
-    
+
+    /// Strategy for decoding a column name
+    public enum ColumnDecodingStrategy {
+        /// Convert column names to lowercase for decoding
+        ///
+        /// Add code example here
+        ///
+        case caseInsensitive
+
+        /// Convert column names to cnake case from camel case for decoding
+        ///
+        /// Add code example here
+        /// 
+        case convertFromSnakeCase
+
+        func decode(key: String) -> String {
+            switch self {
+            case .caseInsensitive:
+                return key.lowercased()
+            case .convertFromSnakeCase:
+                return key.replacingOccurrences(of: "_", with: "")
+            }
+        }
+    }
+}
+
+extension Database {
     /// An SQLite threading mode. See https://www.sqlite.org/threadsafe.html.
     enum ThreadingMode {
         case `default`
